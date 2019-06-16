@@ -14,14 +14,14 @@
 
 - name: create tuned HPC profile directory
   file:
-    path: /etc/tuned/profiles/hpc-compute
+    path: /etc/tuned/hpc-compute
     state: directory
   tags: compute
 
 - name: copy HPC tuned profile
   copy:
     src: tuned-hpc.conf
-    dest: /etc/tuned/profiles/hpc-compute/tuned.conf
+    dest: /etc/tuned/hpc-compute/tuned.conf
   tags: compute
 
 - name: enable HPC tuned profile
