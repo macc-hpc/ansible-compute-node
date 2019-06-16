@@ -1,0 +1,49 @@
+---
+
+- name: install packages
+  yum: "{{ compute_packages }}"
+  tags: compute
+
+- name: set memlock to unlimited
+  pam_limits:
+    domain: '*'
+    limit_type: '-'
+    limit_item: memlock
+    value: unlimited
+  tags: compute
+
+- name: create tuned HPC profile directory
+  file:
+    path: /etc/tuned/profiles/hpc-compute
+    state: directory
+  tags: compute
+
+- name: copy HPC tuned profile
+  copy:
+    src: tuned-hpc.conf
+    dest: /etc/tuned/profiles/hpc-compute/tuned.conf
+  tags: compute
+
+- name: enable HPC tuned profile
+  command: tuned-adm profile hpc-compute
+  tags: compute
+
+- name: create destination mount dir
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  loop: "{{ compute_mounts }}"
+  tags: compute
+
+- name: mount defined mounts
+  mount:
+    src: "{{ item.src }}"
+    path: "{{ item.path }}"
+    fstype: "{{ item.fstype }}"
+    opts: "{{ item.opts }}"
+    state: "{{ item.state }}"
+  loop: "{{ compute_mounts }}"
+  tags: compute
