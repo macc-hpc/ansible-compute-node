@@ -38,7 +38,7 @@
 
 - name: reload sysctl configuration
   command: /usr/sbin/sysctl -p
-  when: register.changed
+  when: result.changed
   tags: compute
 
 - name: copy ib_ipoib module settings
