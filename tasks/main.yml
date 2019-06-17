@@ -33,7 +33,7 @@
 
 - name: copy sysctl configuration
   copy:
-    src: sysctl.conf
+    src: compute/sysctl.conf
     dest: /etc/sysctl.d/98-macc.conf
   register: result
   tags: compute
