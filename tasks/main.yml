@@ -23,10 +23,12 @@
   copy:
     src: tuned-hpc.conf
     dest: /etc/tuned/hpc-compute/tuned.conf
+  register: result
   tags: compute
 
 - name: enable HPC tuned profile
   command: tuned-adm profile hpc-compute
+  when: result.changed
   tags: compute
 
 - name: copy sysctl configuration
