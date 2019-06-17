@@ -41,12 +41,6 @@
   when: result.changed
   tags: compute
 
-- name: copy ib_ipoib module settings
-  copy:
-    src: ib_ipoib.conf
-    dest: /etc/modprobe.d/ib_ipoib.conf
-  tags: compute
-
 - name: create destination mount dir
   file:
     path: "{{ item.path }}"
