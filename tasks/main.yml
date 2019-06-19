@@ -1,7 +1,8 @@
 ---
 
 - name: install packages
-  yum: "{{ compute_packages }}"
+  yum:
+    name: "{{ compute_packages }}"
   tags: compute
 
 - name: increase resource limits
