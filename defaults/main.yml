@@ -3,3 +3,4 @@
 compute_mounts: []
 compute_packages: []
 compute_limits: []
+compute_scripts: []
