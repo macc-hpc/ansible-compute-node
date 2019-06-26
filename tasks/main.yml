@@ -9,7 +9,8 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    owner: "{{ item.owner }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.owner | default('root') }}"
     mode: "{{ item.mode }}"
   loop: "{{ compute_scripts }}"
   tags: compute
