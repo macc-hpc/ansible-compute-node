@@ -1,5 +1,10 @@
 ---
 
+- name: install repositories from RPM
+  yum:
+    name: "{{ compute_repositories }}"
+  tags: compute
+
 - name: install packages
   yum:
     name: "{{ compute_packages }}"
